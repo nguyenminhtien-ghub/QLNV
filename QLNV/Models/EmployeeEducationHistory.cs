@@ -11,5 +11,5 @@ public class EmployeeEducationHistory
     public int OldEducationId { get; set; }
     public int NewEducationId { get; set; }
 
-    public virtual Employee Employee { get; set; }
+    public virtual Employee? Employee { get; set; }
 }

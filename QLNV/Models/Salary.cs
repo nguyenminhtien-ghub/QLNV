@@ -17,7 +17,7 @@ public class Salary
     public decimal Coefficients { get; set; }
 
     public virtual Employee Employee { get; set; }
-    public virtual ICollection<SalaryDetail> SalaryDetails { get; set;}
+    public virtual ICollection<SalaryDetail>? SalaryDetails { get; set;}
 
-    public virtual ICollection<SalaryModifiHistory> SalaryModifiHistorys { get; set; }
+    public virtual ICollection<SalaryModifiHistory>? SalaryModifiHistorys { get; set; }
 }

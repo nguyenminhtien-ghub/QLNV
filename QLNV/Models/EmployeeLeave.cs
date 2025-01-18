@@ -6,7 +6,7 @@ namespace QLNV.Models;
 public class EmployeeLeave
 {
     public int Id { get; set; }
-    public virtual Employee Employee { get; set; }
+    public virtual Employee? Employee { get; set; }
     public DateTime? LeavingDate { get; set; }
 
 

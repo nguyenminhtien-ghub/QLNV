@@ -22,21 +22,21 @@ public class Employee
     
     public string? Ethnic {  get; set; }
     public string? Phone { get; set; }
-    public virtual EmployeePosition EmployeePosition { get; set; }
+    public virtual EmployeePosition? EmployeePosition { get; set; }
     public string? Status { get; set; }
 
-    public virtual Department Department { get; set; }
+    public virtual Department? Department { get; set; }
 
-    public virtual BusinessContract BusinessContract { get; set; }
+    public virtual BusinessContract? BusinessContract { get; set; }
 
-    public virtual EmployeeEducation EductionStatus {  get; set; }
+    public virtual EmployeeEducation? EductionStatus {  get; set; }
 
     public string? CitizenNumber {  get; set; }
 
     public virtual ICollection<EmployeeEducationHistory>? EmployeeEducationHistories { get; set; }
 
-    public virtual EmployeeAward Award { get; set; }
-    public virtual EmployeeFined EmployeeFined { get; set; }
+    public virtual EmployeeAward? Award { get; set; }
+    public virtual EmployeeFined? EmployeeFined { get; set; }
     public virtual ICollection<EmployeePositionHistory>? PositionHistories { get; set;  }
 
     public Salary Salary {  get; set; }

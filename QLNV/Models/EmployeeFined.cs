@@ -9,5 +9,5 @@ public class EmployeeFined
     public string? Detail { get; set; }
     public DateOnly Date { get; set; }
     public decimal Fine { get; set; }
-    public virtual Employee Employee { get; set; }
+    public virtual Employee? Employee { get; set; }
 }

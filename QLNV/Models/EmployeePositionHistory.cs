@@ -10,5 +10,5 @@ public class EmployeePositionHistory
     public string? Detail {  get; set; }
     public int OldDepartment {  get; set; }
     public int NewDepartment { get; set; }
-    public virtual Employee Employee { get; set; }
+    public virtual Employee? Employee { get; set; }
 }

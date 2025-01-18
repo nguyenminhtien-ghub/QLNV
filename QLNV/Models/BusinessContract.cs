@@ -12,5 +12,5 @@ public class BusinessContract
     public DateTime End { get; set; }
     public string? Note { get; set; }
 
-    public virtual ICollection<Employee> Employees { get; set; }
+    public virtual ICollection<Employee>? Employees { get; set; }
 }

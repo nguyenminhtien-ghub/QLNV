@@ -9,5 +9,5 @@ public class EmployeeAward
     public DateOnly Date { get; set; }
     public string? Detail { get; set; }
     public decimal Prize { get; set; }
-    public virtual Employee Employee { get; set; }
+    public virtual Employee? Employee { get; set; }
 }
