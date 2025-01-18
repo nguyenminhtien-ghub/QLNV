@@ -11,24 +11,24 @@ namespace QLNV.Data
         {
         }
 
-        DbSet<BusinessContract> BusinessContracts { get; set; }
-        DbSet<Department> Departments { get; set; }
-        DbSet<EmployeeAward> EmployeeAwards { get; set; }
+        public DbSet<BusinessContract> BusinessContracts { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<EmployeeAward> EmployeeAwards { get; set; }
 
-        DbSet<EmployeeEducation> EmployeeEducations { get; set; }
-        DbSet<EmployeeFined> EmployeeFineds { get; set; }
-        DbSet<EmployeeEducationHistory> EmployeeEducationHistories { get; set; }
-        DbSet<Salary> Salarys { get; set; }
-        DbSet<SalaryDetail> SalaryDetails { get; set; }
+        public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+        public DbSet<EmployeeFined> EmployeeFineds { get; set; }
+        public DbSet<EmployeeEducationHistory> EmployeeEducationHistories { get; set; }
+        public DbSet<Salary> Salarys { get; set; }
+        public DbSet<SalaryDetail> SalaryDetails { get; set; }
 
-        DbSet<SalaryModifiHistory> SalaryModifiHistories { get; set; }
+        public DbSet<SalaryModifiHistory> SalaryModifiHistories { get; set; }
 
-        DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
-        DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
+        public DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
 
-        DbSet<EmployeePosition> EmployeePositions { get; set; }
-        DbSet<EmployeePositionHistory> EmployeePositionHistories { get; set; }
+        public DbSet<EmployeePosition> EmployeePositions { get; set; }
+        public DbSet<EmployeePositionHistory> EmployeePositionHistories { get; set; }
 
 
     }

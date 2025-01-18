@@ -35,13 +35,11 @@ public class Employee
 
     public virtual ICollection<EmployeeEducationHistory>? EducationHistories { get; set; }
 
-    public virtual EmployeeAward? Award { get; set; }
-    public virtual EmployeeFined? EmployeeFined { get; set; }
+    
     public virtual ICollection<EmployeePositionHistory>? PositionHistories { get; set;  }
 
-    public Salary Salary {  get; set; }
-    public virtual EmployeeLeave? Leave { get; set; }
-
-
+    public int SalaryId {  get; set; }
+    public virtual Salary Salary {  get; set; }
+    
 
 }

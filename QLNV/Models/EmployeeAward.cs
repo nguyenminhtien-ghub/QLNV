@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLNV.Models;
 
@@ -8,6 +9,8 @@ public class EmployeeAward
     public int Id { get; set; }
     public DateOnly Date { get; set; }
     public string? Detail { get; set; }
+
+    [Precision(15, 4)]
     public decimal Prize { get; set; }
     public virtual Employee? Employee { get; set; }
 }

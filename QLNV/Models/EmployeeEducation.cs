@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLNV.Models;
 
@@ -11,6 +12,7 @@ public class EmployeeEducation
     public string? EducationStatusCode { get; set; }
     public string? EducationName { get; set; }
 
+    [Precision(15, 4)]
     public decimal Coefficient { get; set; }
 
     public virtual ICollection<Employee>? Employees { get; set; }
