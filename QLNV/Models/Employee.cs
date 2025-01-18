@@ -33,7 +33,7 @@ public class Employee
 
     public string? CitizenNumber {  get; set; }
 
-    public virtual ICollection<EmployeeEducationHistory>? EmployeeEducationHistories { get; set; }
+    public virtual ICollection<EmployeeEducationHistory>? EducationHistories { get; set; }
 
     public virtual EmployeeAward? Award { get; set; }
     public virtual EmployeeFined? EmployeeFined { get; set; }
