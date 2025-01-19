@@ -23,7 +23,7 @@ public class Employee
     public string? Ethnic {  get; set; }
     public string? Phone { get; set; }
     public virtual EmployeePosition? EmployeePosition { get; set; }
-    public string? Status { get; set; }
+    public bool IsActive { get; set; }
 
     public virtual Department? Department { get; set; }
 
