@@ -1,0 +1,119 @@
+﻿
+@model IEnumerable<QLNV.Models.Employee>
+
+
+@{
+    ViewBag.Title = "Nhân viên";
+    Layout = "_AdminLayout";
+}
+
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Nhân viên
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("index","Admin")">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-user"></i> @*<a href="@Url.Action("index","QuanLyUser")">Nhân viên</a>*@
+                Nhân viên
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div>
+    <div style="padding:10px">
+        <a class="btn btn-primary" href="@Url.Action("ThemUser", "QuanLyUser")">
+            Thêm nhân viên
+        </a>
+
+        <a class="btn btn-primary " href="@Url.Action("XuatFileExel", "QuanLyUser")">
+            Xuất danh sách nhân viên
+        </a>
+    </div>
+</div>
+
+
+
+
+<div class="table-responsive">
+    <table id="table-taikhoan" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="success">
+                <th>
+                    Mã nhân viên
+                </th>
+                <th>
+                    Họ tên
+                </th>
+                <th>
+                    Trình độ văn hóa
+                </th>
+                <th>
+                    Giới tính
+                </th>
+                <th>
+                    Ngày bắt đầu
+                </th>
+                <th>
+                    Số lượng: @Model.Count()
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    string education = string.Empty;
+                    string gender = string.Empty;
+                    switch (item.Gender)
+                    {
+                        case Gender.Female:
+                            gender = "Nữ";
+                            break;
+                        case Gender.Male:
+                            gender = "Nam";
+                            break;
+                        default:
+                            gender = "Khác";
+                            break;
+                    }
+
+
+                    
+
+                    <tr>
+                        <td>@item.NumberCode</td>
+                        <td>@item.Name</td>
+                        <td>@education</td>
+                        <td>@gender</td>
+                        <td>
+                            @String.Format("{0:dd/MM/yyyy}", @item.BusinessContract.Begin)
+                            @{
+                                DateTime begin = Convert.ToDateTime(@item.BusinessContract.Begin);
+                                DateTime now = DateTime.Now.Date;
+                                TimeSpan Times = now - begin;
+
+                                int years = (int)Times.Days / 365;
+
+                            }
+
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action("Index", "Employee", new { @id = @item.Id })"><i class="fa fa-address-book"></i>Quá trình công tác</a>
+                            <a class="btn btn-info" href="@Url.Action("Index", "Employee", new { @id = @item.Id})">Học vấn</a>
+                            <a class="btn btn-warning" href="@Url.Action("Index", "Employee", new {@id = @item.Id })"><i class="fa fa-pencil-square-o x5" aria-hidden="true"></i>Sửa</a>
+                            <a class="btn btn-danger" href="@Url.Action("Index", "Employee", new { @id = @item.Id })"><i class="fa fa-trash-o"></i>Xóa</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
