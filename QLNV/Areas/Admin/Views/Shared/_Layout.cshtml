@@ -44,8 +44,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @* @Html.ActionLink("Trang quản trị", "Index", "Admin", new { area = "Admin" }, new { @class = "navbar-brand" }) *@
-                <a href="/Admin/AdminDashboard" class="navbar-brand">Trang quản trị</a>
+                @Html.ActionLink("Trang quản trị", "Index", "AdminDashboard", htmlAttributes: new { @class = "navbar-brand" })
+                @* <a href="/Admin/AdminDashboard" class="navbar-brand">Trang quản trị</a> *@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -81,16 +81,16 @@
                         <a href="/Admin/AdminDashboard"><i class="fa fa-fw fa-dashboard"></i> Tổng quan</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Employee")"><i class="fa fa-fw fa-user"></i> Nhân Viên</a>
+                        <a href="@Url.Action("Index","Employee", new { area = "" })"><i class="fa fa-fw fa-user"></i> Nhân Viên</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "Departments")"><i class="fa fa-tasks"></i> Phòng ban</a>
+                        <a href="@Url.Action("Index", "Departments", new { area = "" })"><i class="fa fa-tasks"></i> Phòng ban</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Salary")"><i class="fa fa-money"></i> Lương nhân viên</a>
+                        <a href="@Url.Action("Index","Salary", new { area = "" })"><i class="fa fa-money"></i> Lương nhân viên</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","EmployeeAwarded")"><i class="fa fa-money"></i> Khen thưởng</a>
+                        <a href="@Url.Action("Index","EmployeeAwarded", new { area = "" })"><i class="fa fa-money"></i> Khen thưởng</a>
                     </li>
                     @*<li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> MaNhanVien <i class="fa fa-fw fa-caret-down"></i></a>
