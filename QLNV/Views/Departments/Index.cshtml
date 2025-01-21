@@ -26,7 +26,7 @@
     <a class="btn btn-primary" href="@Url.Action("Create", "Departments")">
         Thêm phòng ban
     </a>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Departments")">
+    <a class="btn btn-primary" href="@Url.Action("EditAllowance", "Departments")">
         Phụ cấp chức vụ
     </a>
 </div>
@@ -55,7 +55,7 @@
 
                             <a class="btn btn-info  " href="@Url.Action("Details", "Departments", new { @id = @item.Id })"><span aria-hidden="true">Danh sách nhân viên</span> </a>
                             <a class="btn btn-warning" href="@Url.Action("Edit", "Departments", new {@id = @item.Id })"><i class="fa fa-pencil-square-o x5" aria-hidden="true">Sửa</i></a>
-                            <a class="btn btn-danger  " href="@Url.Action("Index", "Departments", new { @id = @item.Id })"><span aria-hidden="true"><i class="fa fa-trash-o">Xóa</i></span> </a>
+                            <a class="btn btn-danger  " href="@Url.Action("Delete", "Departments", new { @id = @item.Id })"><span aria-hidden="true"><i class="fa fa-trash-o">Xóa</i></span> </a>
                         </td>
                     </tr>
 

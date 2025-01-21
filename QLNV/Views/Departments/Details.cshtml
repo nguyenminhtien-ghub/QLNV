@@ -24,15 +24,11 @@
     <table id="table-taikhoan" class="table table-striped table-hover table-bordered table-responsive ">
         <thead>
             <tr class="success">
-                @*<th>
-                Mã nhân viên
-                </th>*@
+                
                 <th>
                     Họ tên
                 </th>
-                @*<th>
-                Hình ảnh
-                </th>*@
+                
                 <th>
                     Giới tính
                 </th>
@@ -57,21 +53,14 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    @*<td>
-                @item.MaNhanVien
-                @Html.DisplayFor(modelItem => item.MaNhanVien)
-                </td>*@
+                    
 
                     <td>
 
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
 
-                    @*<td>
-
-                <img src="@Url.Content("~/Content/images/" + item.HinhAnh)" height="70" />
-
-                </td>*@
+                    
                     <td>
                         @{
                             int gender = int.Parse(@Html.DisplayFor(modelItem => item.Gender).ToString());
@@ -100,9 +89,9 @@
                         @Html.DisplayFor(modelItem => item.EductionStatus.EducationName)
                     </td>
                     <td>
-                        @*<a class="btn btn-primary" href="@Url.Action("ChuyenNhanVien", "KhenThuong", new { @id = @item.MaNhanVien })">Khen thưởng</a>*@
+                       
                         <a class="btn btn-info" href="@Url.Action("Index", "Employee", new { @id = @item.Id })">Quá trình công tác</a>
-                        <a class="btn btn-primary" href="@Url.Action("Index", "Departments", new { @id = @item.Id })">Chuyển nhân viên</a>
+                        <a class="btn btn-primary" href="@Url.Action("TransferEmployee", "Departments", new { @id = @item.Id })">Chuyển nhân viên</a>
                     </td>
                 </tr>
             }

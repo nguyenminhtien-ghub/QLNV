@@ -140,6 +140,55 @@ public class DepartmentsController : Controller
         return View(employee);
     }
 
+    [HttpPost]
+    public IActionResult TransferEmployee(Employee employee, EmployeePositionHistory history) 
+    {
+        var transferredEmployee = _context.Employees.Where(n => n.Id == employee.Id).FirstOrDefault();
+
+        transferredEmployee.Id = employee.Id;
+        transferredEmployee.NumberCode = employee.NumberCode;
+        transferredEmployee.Name = employee.Name;
+        transferredEmployee.EmployeePosition = employee.EmployeePosition;
+        transferredEmployee.Department = _context.Departments.Find(history.NewDepartment);
+
+        
+        transferredEmployee.Gender = employee.Gender;
+        transferredEmployee.Country = employee.Country;
+        transferredEmployee.AvatarImagePath = employee.AvatarImagePath;
+        transferredEmployee.Ethnic = employee.Ethnic;
+        transferredEmployee.Phone = employee.Phone;
+        transferredEmployee.BusinessContract = employee.BusinessContract;
+        transferredEmployee.DOB = employee.DOB;
+        transferredEmployee.IsActive = employee.IsActive;
+        transferredEmployee.EductionStatus = employee.EductionStatus;
+       
+        transferredEmployee.CitizenNumber = employee.CitizenNumber;
+
+       
+        EmployeePositionHistory transfer = new();
+        transfer.Employee = _context.Employees.Find(employee.Id);
+
+        transfer.ChangeDate = DateOnly.FromDateTime(DateTime.Now);
+        transfer.OldDepartment = employee.Department.Id; 
+
+        transfer.NewDepartment = history.NewDepartment;
+        transfer.Detail = history.Detail;
+        
+        var salary = _context.Salarys.SingleOrDefault(e => e.Employee.Id.Equals(employee.Id));
+        var position = _context.EmployeePositions.SingleOrDefault(e => e.Id.Equals(employee.EmployeePosition.Id));
+
+        salary.Allowance = position.Coefficient;
+
+        _context.EmployeePositionHistories.Add(transfer);
+        ViewBag.Positions = _context.EmployeePositions.ToList();
+        ViewBag.Departments = _context.Departments.ToList();
+        ViewBag.Historys = _context.EmployeePositionHistories.ToList();
+
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
+    }
+
+
     // GET: Departments/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
@@ -150,12 +199,33 @@ public class DepartmentsController : Controller
 
         var department = await _context.Departments
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (department == null)
+
+
+        if (department is null)
         {
             return NotFound();
         }
 
-        return View(department);
+        var employees = department.Employees.ToList();
+
+        var contacts = _context.BusinessContracts.ToList();
+
+        foreach (var c in contacts)
+        {
+            foreach (var e in employees)
+            {
+                if (c.Id == e.Id)
+                {
+                    _context.Employees.Remove(e);
+                }
+            }
+            _context.BusinessContracts.Remove(c);
+        }
+        _context.Departments.Remove(department);
+        _context.SaveChanges();
+
+        
+        return RedirectToAction(nameof(Index));
     }
 
     // POST: Departments/Delete/5
@@ -172,6 +242,25 @@ public class DepartmentsController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
+
+    public IActionResult EditAllowance()
+    {
+        var positions = _context.EmployeePositions.ToList();
+        return View(positions);
+    }
+
+    [HttpPost]
+    public IActionResult EditAllowance(int id, FormCollection form)
+    {
+        var position = _context.EmployeePositions.Find(id);
+        position.Coefficient = decimal.Parse(form["Coefficient"].ToString() ?? "0");
+
+        _context.SaveChanges();
+        return View();
+    }
+
+
+
 
     private bool DepartmentExists(int id)
     {
