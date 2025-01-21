@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QLNV.Data;
+using QLNV.Models;
 
 namespace QLNV.Controllers;
 
@@ -17,5 +18,20 @@ public class EmployeeAwardedController : Controller
     {
         var awards = _context.EmployeeAwards.ToList();
         return View(awards);
+    }
+
+    public IActionResult Create()
+    {
+        var employees = _context.Employees.ToList();
+        ViewBag.Employees = (List<Employee>)employees;
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(EmployeeAward award)
+    {
+        _context.EmployeeAwards.Add(award);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
     }
 }

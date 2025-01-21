@@ -44,8 +44,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @* @Html.ActionLink("Trang quản trị", "Index", "Admin", new { area = "Admin" }, new { @class = "navbar-brand" }) *@
-                <a href="/Admin/AdminDashboard" class="navbar-brand">Trang quản trị</a>
+                @Html.ActionLink("Trang quản trị", "Index", "AdminDashBoard", new { area = "Admin" }, new { @class = "navbar-brand" })
+                
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -78,7 +78,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" id="activeMenu">
                     <li class="active">
-                        <a href="/Admin/AdminDashboard"><i class="fa fa-fw fa-dashboard"></i> Tổng quan</a>
+                        <a href="@Url.Action("Index", "AdminDashBoard", new { area = "Admin"})"><i class="fa fa-fw fa-dashboard"></i> Tổng quan</a>
                     </li>
                     <li>
                         <a href="@Url.Action("Index","Employee")"><i class="fa fa-fw fa-user"></i> Nhân Viên</a>

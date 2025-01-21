@@ -12,5 +12,7 @@ public class EmployeeAward
 
     [Precision(15, 4)]
     public decimal Prize { get; set; }
+
+    public int EmployeeId { get; set; }
     public virtual Employee? Employee { get; set; }
 }
