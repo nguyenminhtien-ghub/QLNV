@@ -41,8 +41,12 @@ public class DepartmentsController : Controller
         {
             return NotFound();
         }
+        var departmentName = department.Name;
+        ViewBag.DepartmentName = departmentName;
+        ViewBag.Id = id;
+        var employees = _context.Employees.Where(e => e.Department.Id == id);
 
-        return View(department);
+        return View(employees);
     }
 
     // GET: Departments/Create
@@ -122,6 +126,18 @@ public class DepartmentsController : Controller
             return RedirectToAction(nameof(Index));
         }
         return View(department);
+    }
+
+
+    public IActionResult TransferEmployee(int employeeId)
+    {
+        var employee = _context.Employees.FirstOrDefault(e => e.Id == employeeId);
+
+        if (employee is null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View(employee);
     }
 
     // GET: Departments/Delete/5
