@@ -13,7 +13,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a href="@Url.Action("index","Admin")">Tổng quan</a>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard", new { area = "Admin"})">Tổng quan</a>
             </li>
             <li>
                 <i class="fa fa-tasks"></i> Phòng ban
@@ -23,10 +23,10 @@
 </div>
 
 <div style="margin:10px">
-    <a class="btn btn-primary" href="@Url.Action("ThemPhongBan", "QuanLyPhongBan")">
+    <a class="btn btn-primary" href="@Url.Action("Create", "Departments")">
         Thêm phòng ban
     </a>
-    <a class="btn btn-primary" href="@Url.Action("CapNhatPhuCap", "QuanLyPhongBan")">
+    <a class="btn btn-primary" href="@Url.Action("Index", "Departments")">
         Phụ cấp chức vụ
     </a>
 </div>
@@ -53,8 +53,8 @@
                         <td>@item.Location</td>
                         <td>
 
-                            <a class="btn btn-info  " href="@Url.Action("Index", "Departments", new { @id = @item.Id })"><span aria-hidden="true">Danh sách nhân viên</span> </a>
-                            <a class="btn btn-warning" href="@Url.Action("Index", "Departments", new {@id = @item.Id })"><i class="fa fa-pencil-square-o x5" aria-hidden="true">Sửa</i></a>
+                            <a class="btn btn-info  " href="@Url.Action("Details", "Departments", new { @id = @item.Id })"><span aria-hidden="true">Danh sách nhân viên</span> </a>
+                            <a class="btn btn-warning" href="@Url.Action("Edit", "Departments", new {@id = @item.Id })"><i class="fa fa-pencil-square-o x5" aria-hidden="true">Sửa</i></a>
                             <a class="btn btn-danger  " href="@Url.Action("Index", "Departments", new { @id = @item.Id })"><span aria-hidden="true"><i class="fa fa-trash-o">Xóa</i></span> </a>
                         </td>
                     </tr>

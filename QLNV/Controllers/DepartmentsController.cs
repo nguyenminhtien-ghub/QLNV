@@ -58,6 +58,12 @@ public class DepartmentsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id,DepartmentNumberCode,Name,Location,Phone")] Department department)
     {
+        if (_context.Departments.Any(x => x.Id == department.Id))
+        {
+            ViewBag.err = "mã phòng ban đã tồn tại ";
+            return View(department);
+        }
+
         if (ModelState.IsValid)
         {
             _context.Add(department);

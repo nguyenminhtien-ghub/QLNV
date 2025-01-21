@@ -1,10 +1,153 @@
 ﻿@model QLNV.Models.Department
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Thêm phòng ban";
+    Layout = "_AdminLayout";
 }
 
-<h1>Create</h1>
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Thêm phòng ban
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index","AdminDashboard", new { area = "Admin"})">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-tasks"></i> <a href="@Url.Action("Index","Departments")">Phòng ban</a>
+            </li>
+            <li>
+                <i class="fa fa-tasks"></i>Thêm phòng ban
+            </li>
+        </ol>
+    </div>
+</div>
+<form class="form-horizontal" role="form" method="post">
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        <!--start-->
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Id</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="Id"
+                   class="form-control"
+                   id="Id"
+                   
+                   required />
+
+        </div>
+        <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+                @ViewBag.err
+                @Html.ValidationMessageFor(model => model.Id)
+            </label>
+        </div>
+        <!--end-->
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Mã phòng ban</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="DepartmentNumberCode"
+                   class="form-control"
+                   id="DepartmentNumberCode"
+                   
+                   required />
+
+        </div>
+        <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+
+                @Html.ValidationMessageFor(n => n.DepartmentNumberCode)
+            </label>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Tên phòng ban</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="Name"
+                   class="form-control"
+                   id="Name"
+                   
+                   required />
+
+        </div>
+        <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+
+                @Html.ValidationMessageFor(n => n.Name)
+            </label>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <!--start-->
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Địa chỉ</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="Location"
+                   class="form-control"
+                   id="Location"
+                   
+                   required />
+
+        </div>
+        <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+
+                @Html.ValidationMessageFor(model => model.Location)
+            </label>
+        </div>
+        <!--end-->
+
+    </div>
+
+    <div class="form-group">
+        <!--start-->
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Số điện thoại</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="Phone"
+                   class="form-control"
+                   id="Phone"
+                   
+                   required />
+
+        </div>
+        <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+
+                @Html.ValidationMessageFor(model => model.Phone)
+            </label>
+        </div>
+        <!--end-->
+
+    </div>
+
+    <div class="form-group">
+        <div class="  col-md-offset-5 col-sm-offset-4 col-sm-5">
+            <input type="submit" value="Thêm phòng ban" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+@* <h1>Create</h1>
 
 <h4>Department</h4>
 <hr />
@@ -42,4 +185,4 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+ *@
