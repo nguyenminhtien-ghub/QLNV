@@ -208,7 +208,7 @@ public class DepartmentsController : Controller
 
         var employees = department.Employees.ToList();
 
-        var contacts = _context.BusinessContracts.ToList();
+        var contacts = employees.Select(e => e.BusinessContract).ToList();
 
         foreach (var c in contacts)
         {

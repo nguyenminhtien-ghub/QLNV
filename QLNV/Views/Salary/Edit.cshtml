@@ -1,5 +1,245 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
+@model Salary
+
 @{
+    ViewBag.Title = "Sửa lương nhân viên";
 }
+
+
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Cập nhật bảng lương nhân viên
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index","AdminDashboard", new { area = "Admin" })">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-money"></i> <a href="@Url.Action("Index","Salary")">Lương</a>
+            </li>
+            <li>
+                <i class="fa fa-money"></i> Cập nhật lương nhân viên
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="">
+    <div class=" col-md-6 col-md-offset-3">
+        @Html.AntiForgeryToken()
+
+        @* <form class="form-horizontal" @Url.Action("SuaBangLuong", "QuanLyLuong") method="post" role="form"> *@
+        <form class="form-horizontal" method="post" role="form">
+
+            @Html.ValidationSummary(true)
+            @*@Html.HiddenFor(model => model.MaNhanVien)*@
+
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Mã nhân viên</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="Id"
+                           type="text"
+                           value="@Model.Id"
+                           readonly />
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.Id)
+                    </label>
+
+                </div>
+                <!--end-->
+            </div>
+            
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Lương hiện tại</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="MinimumSalary"
+                           type="number"
+                           value="@Model.MinimumSalary"
+                           readonly />
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.MinimumSalary)
+                    </label>
+
+                </div>
+                <!--end-->
+            </div>
+
+            
+           
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Cập nhật lương</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="NewSalary"
+                           type="number"
+                           pattern="[1-9](?:\d*)?\d+"
+                           title="nhập tiền lương"
+                           value="@Model.MinimumSalary"
+                           required />
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        
+                    </label>
+
+                </div>
+                <!--end-->
+            </div>
+
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Hệ số lương</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="Coefficients"
+                           type="text"
+                           value="@Model.Coefficients" />
+
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.Coefficients)
+                    </label>
+
+                </div>
+                <!--end-->
+            </div>
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Bảo hiểm xã hội</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="SocialInsurance"
+                           type="text"
+                           value="@Model.SocialInsurance" />
+
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.SocialInsurance)
+                    </label>
+
+                </div>
+                <!--end-->
+
+            </div>
+            <!--BHYT-->
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Bảo hiểm y tế</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="HealthInsurance"
+                           type="text"
+                           value="@Model.HealthInsurance" />
+
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.HealthInsurance)
+                    </label>
+
+                </div>
+                <!--end-->
+
+            </div>
+            <!--BHTN-->
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Bảo hiểm tự nguyện</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="UnemploymentInsurance"
+                           type="text"
+                           value="@Model.UnemploymentInsurance" />
+
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.UnemploymentInsurance)
+                    </label>
+
+                </div>
+                <!--end-->
+
+            </div>
+            <!--phu cap-->
+            <div class="form-group hidden">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Phụ cấp</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="Allowance"
+                           type="number"
+                           value="@Model.Allowance" />
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.Allowance)
+                    </label>
+
+                </div>
+                <!--end-->
+
+            </div>
+
+            <div class="form-group">
+                <!--start-->
+                <div class="col-sm-4 control-label">
+                    <label>Thuế thu nhập cá nhân</label>
+                </div>
+                <div class="col-sm-8">
+                    <input class="form-control"
+                           name="IncomeTax"
+                           type="number"
+                           value="@Model.IncomeTax" />
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(model => model.IncomeTax)
+                    </label>
+
+                </div>
+                <!--end-->
+
+            </div>
+
+            <div class="form-group">
+                <div class=" col-sm-offset-4 col-sm-5">
+                    <input type="submit" value="Lưu lại" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="clearfix"></div>
+@*<div>
+        @Html.ActionLink("Quay lại", "Index")
+    </div>*@
+

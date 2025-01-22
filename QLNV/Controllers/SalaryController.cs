@@ -61,8 +61,12 @@ public class SalaryController : Controller
             _context.SalaryModifiHistories.Add(modifiRecord);
             _context.SaveChanges();
         }
+        
 
         return RedirectToAction(nameof(Index));
     }
+
+
+
 
 }
