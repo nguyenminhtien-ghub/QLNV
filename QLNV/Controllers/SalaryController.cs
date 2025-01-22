@@ -122,5 +122,15 @@ public class SalaryController : Controller
         return View(paidlist);
     }
 
+    public IActionResult PreviousSalary(int id)
+    {
+        var previous = _context.SalaryModifiHistories.Where(x => x.EmployeeId == id).ToList();
+        if (previous is not null)
+        {
+            return View(previous);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 
 }
