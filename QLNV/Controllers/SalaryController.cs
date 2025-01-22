@@ -66,7 +66,61 @@ public class SalaryController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public IActionResult Payroll(int id)
+    {
+        var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+        if (employee is not null)
+        {
+            
+            var details = _context.SalaryDetails.FirstOrDefault(d => d.EmployeeId == id);
+            //tìm bảng lương tương ứng với nhân viên
+            var salary = _context.Salarys.FirstOrDefault(x => x.Employee.Id == id);
+            SalaryDetail paidRecord = new();
 
+            DateTime now = DateTime.Now;
+            (decimal tax, decimal total, decimal allowance) = (0, 0, 0);
+
+            
+            paidRecord.EmployeeId = salary.Employee.Id;
+
+            paidRecord.BaseSalary = salary.MinimumSalary * salary.Coefficients;
+
+            paidRecord.SocialInsurance = salary.SocialInsurance * salary.MinimumSalary / 100.00M;
+            
+            paidRecord.HealthInsurance = salary.HealthInsurance * salary.MinimumSalary / 100.00M;
+
+            paidRecord.UnemploymentInsurance = salary.UnemploymentInsurance * salary.MinimumSalary / 100.00M;
+
+            allowance = salary.MinimumSalary * salary.Allowance;
+            paidRecord.Allowance = allowance;
+
+
+            
+            tax = salary.MinimumSalary * salary.IncomeTax / 100.00M;
+            paidRecord.IncomeTax = allowance;
+            paidRecord.PaidDate = DateOnly.FromDateTime(DateTime.Now);
+            paidRecord.AwardPrize = 0;
+            paidRecord.Fine = 0;
+
+            total = paidRecord.BaseSalary - (paidRecord.SocialInsurance + paidRecord.HealthInsurance + paidRecord.UnemploymentInsurance) - paidRecord.IncomeTax + paidRecord.Allowance;
+            paidRecord.Total = total;
+            
+            
+            ViewBag.ok = "thanh toán thành công";
+            _context.SalaryDetails.Add(paidRecord);
+            
+            _context.SaveChanges();
+
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
+
+    public IActionResult PaidHistory()
+    {
+        var paidlist = _context.SalaryDetails.ToList();
+        return View(paidlist);
+    }
 
 
 }

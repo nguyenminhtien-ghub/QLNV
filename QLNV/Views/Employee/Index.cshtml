@@ -15,10 +15,10 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a href="@Url.Action("index","Admin")">Tổng quan</a>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard", new { area = "Admin" })">Tổng quan</a>
             </li>
             <li>
-                <i class="fa fa-user"></i> @*<a href="@Url.Action("index","QuanLyUser")">Nhân viên</a>*@
+                <i class="fa fa-user"></i> 
                 Nhân viên
             </li>
         </ol>
@@ -27,12 +27,8 @@
 
 <div>
     <div style="padding:10px">
-        <a class="btn btn-primary" href="@Url.Action("ThemUser", "QuanLyUser")">
+        <a class="btn btn-primary" href="@Url.Action("Index", "Employee")">
             Thêm nhân viên
-        </a>
-
-        <a class="btn btn-primary " href="@Url.Action("XuatFileExel", "QuanLyUser")">
-            Xuất danh sách nhân viên
         </a>
     </div>
 </div>

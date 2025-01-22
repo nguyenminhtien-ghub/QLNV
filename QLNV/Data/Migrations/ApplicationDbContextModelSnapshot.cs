@@ -598,7 +598,7 @@ namespace QLNV.Data.Migrations
                         .HasPrecision(15, 4)
                         .HasColumnType("decimal(15,4)");
 
-                    b.Property<int>("EmployId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Fine")

@@ -7,7 +7,7 @@ namespace QLNV.Models;
 public class SalaryDetail
 {
     public int Id {  get; set; }
-    public int EmployId { get; set; }
+    public int EmployeeId { get; set; }
 
     [Precision(15, 4)]
     public decimal BaseSalary { get; set; }
