@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Cập nhật thông tin";
+    Layout = "_AdminLayout";
+}
+<link href="~/Content/css/account.css" rel="stylesheet" />
+
+@model Employee
+
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Cập nhật thông tin nhân viên
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashBoard", new { area = "Admin" })">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-fw fa-user"></i> <a href="@Url.Action("Index","Employee")">Nhân viên</a>
+            </li>
+            <li>
+                <i class="fa fa-fw fa-user"></i>Cập nhật thông tin nhân viên
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="">
+    <div class=" col-md-6 col-md-offset-3">
+        
+
+        @Html.AntiForgeryToken()
+        <form class="form-horizontal" method="post" role="form">
+            @Html.ValidationSummary(true)
+            
+            <div class="form-group">
+                <div class="">
+                    <div class="col-sm-4 control-label">
+                        <label>Tài khoản</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" name="MaNhanVien"
+                               class="form-control"
+                               maxlength="20"
+                               value="@Model.Id"
+                               id="MaNhanVien" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @ViewBag.MaNhanVien
+                        @Html.ValidationMessageFor(n => n.Id)
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <div class="col-sm-4 control-label">
+                        <label>Họ tên</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" name="NumberCode"
+                               class="form-control"
+                               value="@Model.NumberCode"
+                               id="HoTen" required />
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(n => n.NumberCode)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <div class="col-sm-4 control-label">
+                        <label>Họ tên</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" name="Name"
+                               class="form-control"
+                               value="@Model.Name"
+                               id="HoTen" required />
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-5" style="height:15px">
+                    <label class="control-label text-danger">
+                        @Html.ValidationMessageFor(n => n.Name)
+                    </label>
+                </div>
+            </div>
+
+            
+
+            
+
+            
+            <div class="form-group">
+                <div class="control-label  col-md-4 col-sm-4">
+                    <label>Trình độ học vấn</label>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    
+                    <select name="EductionStatus" class="form-control">
+                        @foreach (var item in (List<EmployeeEducation>)ViewBag.Edus)
+                        {
+                            if (Model.EductionStatus.Id == item.Id)
+                            {
+                                <option value="@item.EducationName.ToString()" selected>@item.EducationName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.EducationName.ToString()">@item.EducationName</option>
+                            }
+                                
+                        }
+                    </select>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Giới tính</label>
+
+                <div class="col-sm-8 ">
+                    @{
+                        string check0 = string.Empty;
+                        string check1 = string.Empty;
+                        string check2 = string.Empty;
+                        switch (@Model.Gender)
+                        {
+                            case Gender.Female:
+                                check0 = "checked";
+                                break;
+                            case Gender.Male:
+                                check1 = "checked";
+                                break;
+                            default:
+                                check2 = "checked";
+                                break;
+                        }
+                    }
+                    <div class="radio-inline">
+                        <label><input type="radio" name="Gender" value="1" @check1>Nam</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="Gender" value="0" @check0>Nữ</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="Gender" value="2" @check2>Khác</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden">
+                <input type="text" name="Country" value="@Model.Country" />
+                <input type="text" name="AvatarImagePath" value="@Model.AvatarImagePath" />
+                <input type="text" name="Ethnic" value="@Model.Ethnic" />
+                <input type="text" name="Phone" value="@Model.Phone" />
+                <input type="text" name="BusinessContract" value="@Model.BusinessContract" />
+                <input type="text" name="DOB" value="@Model.DOB" />
+                @Html.TextBoxFor(n => n.IsActive)
+
+                <input type="text" name="EductionStatus" value="@Model.EductionStatus" />
+                <input type="text" name="Department" value="@Model.Department" />
+                <input type="text" name="EmployeePosition" value="@Model.EmployeePosition" />
+                <input type="text" name="CitizenNumber" value="@Model.CitizenNumber" />
+
+            </div>
+
+            @*button *@
+            <div class="form-group">
+                <div class=" col-sm-offset-4 col-sm-5">
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+@*@section css{
+
+    }*@
