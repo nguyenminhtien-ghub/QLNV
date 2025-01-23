@@ -44,7 +44,7 @@ public class DepartmentsController : Controller
         var departmentName = department.Name;
         ViewBag.DepartmentName = departmentName;
         ViewBag.Id = id;
-        var employees = _context.Employees.Where(e => e.DepartmentId == id);
+        var employees = _context.Employees.Where(e => e.DepartmentId == id).ToList();
 
         return View(employees);
     }
@@ -174,7 +174,7 @@ public class DepartmentsController : Controller
         transfer.NewDepartment = history.NewDepartment;
         transfer.Detail = history.Detail;
         
-        var salary = _context.Salarys.SingleOrDefault(e => e.Employee.Id.Equals(employee.Id));
+        var salary = _context.Salarys.SingleOrDefault(e => e.EmployeeId.Equals(employee.Id));
         var position = _context.EmployeePositions.SingleOrDefault(e => e.Id.Equals(employee.EmployeePositionId));
 
         salary.Allowance = position.Coefficient;

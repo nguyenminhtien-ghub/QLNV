@@ -22,14 +22,14 @@ public class SalaryController : Controller
 
     public IActionResult Edit(int id)
     {
-        var salary = _context.Salarys.FirstOrDefault(s => s.Employee.Id == id);
+        var salary = _context.Salarys.FirstOrDefault(s => s.EmployeeId == id);
         return View(salary);
     }
 
     [HttpPost]
     public IActionResult Edit(Salary salary, SalaryModifiHistory history)
     {
-        var newSalary = _context.Salarys.FirstOrDefault(s => s.Employee.Id == salary.Employee.Id);
+        var newSalary = _context.Salarys.FirstOrDefault(s => s.EmployeeId == salary.EmployeeId);
         if (newSalary != null)
         {
             
@@ -48,7 +48,7 @@ public class SalaryController : Controller
             
             SalaryModifiHistory modifiRecord = new();
             modifiRecord.ModifiDate = DateOnly.FromDateTime(DateTime.Now);
-            modifiRecord.EmployeeId = salary.Employee.Id;
+            modifiRecord.EmployeeId = salary.EmployeeId ?? -1;
             modifiRecord.OldSalary = salary.MinimumSalary;
             modifiRecord.NewSalary = history.NewSalary;
             modifiRecord.SocialInsurance = salary.SocialInsurance;
@@ -74,14 +74,14 @@ public class SalaryController : Controller
             
             var details = _context.SalaryDetails.FirstOrDefault(d => d.EmployeeId == id);
             //tìm bảng lương tương ứng với nhân viên
-            var salary = _context.Salarys.FirstOrDefault(x => x.Employee.Id == id);
+            var salary = _context.Salarys.FirstOrDefault(x => x.EmployeeId == id);
             SalaryDetail paidRecord = new();
 
             DateTime now = DateTime.Now;
             (decimal tax, decimal total, decimal allowance) = (0, 0, 0);
 
             
-            paidRecord.EmployeeId = salary.Employee.Id;
+            paidRecord.EmployeeId = salary.EmployeeId ?? -1;
 
             paidRecord.BaseSalary = salary.MinimumSalary * salary.Coefficients;
 

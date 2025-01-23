@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace QLNV.Models;
 
@@ -46,8 +47,14 @@ public class Employee
     
     public virtual ICollection<EmployeePositionHistory>? PositionHistories { get; set;  }
 
-    public int SalaryId {  get; set; }
-    public virtual Salary Salary {  get; set; }
+
+
+    [AllowNull]
+    public virtual int? SalaryId {  get; set; }
+
+    [AllowNull]
+    [ForeignKey(nameof(SalaryId))]
+    public virtual Salary? Salary { get; set; }
     
 
 }

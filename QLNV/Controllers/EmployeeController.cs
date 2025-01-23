@@ -24,7 +24,7 @@ public class EmployeeController : Controller
     {
         var employee = _context.Employees.SingleOrDefault(e => e.Id == id);
         
-        var salary = _context.Salarys.SingleOrDefault(s => s.Employee.Id == id);
+        var salary = _context.Salarys.SingleOrDefault(s => s.EmployeeId == id);
 
         var detailsSalarys = _context.SalaryDetails.Where(x => x.EmployeeId == id).ToList();
 
@@ -85,7 +85,7 @@ public class EmployeeController : Controller
 
                 var edu = _context.EmployeeEducations.FirstOrDefault(x => x.Id.Equals(previous.Id));
 
-                var salary = _context.Salarys.FirstOrDefault(s => s.Employee.Id.Equals(previous.Id));
+                var salary = _context.Salarys.FirstOrDefault(s => s.EmployeeId.Equals(previous.Id));
 
                 if (edu.Coefficient <= 0)
                 {
@@ -151,20 +151,15 @@ public class EmployeeController : Controller
                 
                 newEmployee.IsActive = true;
                
-
-                //add hop dong
-                // contract.Employees = nv.MaNhanVien;
                 
-
-                
-                salary.Employee = employee;
+                salary.EmployeeId = employee.Id;
                 salary.MinimumSalary = 1150000;
                 salary.SocialInsurance = 8.00M;
                 salary.HealthInsurance = 1.50M;
                 salary.UnemploymentInsurance = 1.00M;
 
                 var edu = _context.EmployeeEducations.FirstOrDefault(x => x.Id.Equals(employee.EmployeeEducatonId));
-                var position = _context.EmployeePositions.SingleOrDefault(p => p.Id.Equals(employee.Id));
+                var position = _context.EmployeePositions.SingleOrDefault(p => p.Id.Equals(employee.EmployeePositionId));
 
                 if (edu.Id.Equals(employee.EmployeeEducatonId))
                 {
@@ -183,12 +178,19 @@ public class EmployeeController : Controller
 
                 
                 _context.Employees.Add(newEmployee);
-                
+              
 
+                _context.SaveChanges();
+                
+                salary.EmployeeId = newEmployee.Id;
+                
                 _context.Salarys.Add(salary);
                 
                 _context.SaveChanges();
-                
+
+                newEmployee.SalaryId = salary.Id;
+
+                _context.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
             }

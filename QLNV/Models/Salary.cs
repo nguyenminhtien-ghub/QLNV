@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace QLNV.Models;
 
@@ -29,7 +30,11 @@ public class Salary
     [Precision(15, 4)]
     public decimal Coefficients { get; set; }
 
-    public virtual Employee Employee { get; set; }
+    
+    public virtual int? EmployeeId { get; set; }
+
+    
+
     public virtual ICollection<SalaryDetail>? SalaryDetails { get; set;}
 
     public virtual ICollection<SalaryModifiHistory>? SalaryModifiHistorys { get; set; }

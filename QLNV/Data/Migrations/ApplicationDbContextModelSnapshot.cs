@@ -301,7 +301,7 @@ namespace QLNV.Data.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SalaryId")
+                    b.Property<int?>("SalaryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -312,8 +312,7 @@ namespace QLNV.Data.Migrations
 
                     b.HasIndex("EmployeePositionId");
 
-                    b.HasIndex("SalaryId")
-                        .IsUnique();
+                    b.HasIndex("SalaryId");
 
                     b.ToTable("employee");
                 });
@@ -519,6 +518,9 @@ namespace QLNV.Data.Migrations
                     b.Property<decimal>("Coefficients")
                         .HasPrecision(15, 4)
                         .HasColumnType("decimal(15,4)");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("HealthInsurance")
                         .HasPrecision(15, 4)
@@ -733,10 +735,8 @@ namespace QLNV.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("QLNV.Models.Salary", "Salary")
-                        .WithOne("Employee")
-                        .HasForeignKey("QLNV.Models.Employee", "SalaryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("SalaryId");
 
                     b.Navigation("Department");
 
@@ -842,9 +842,6 @@ namespace QLNV.Data.Migrations
 
             modelBuilder.Entity("QLNV.Models.Salary", b =>
                 {
-                    b.Navigation("Employee")
-                        .IsRequired();
-
                     b.Navigation("SalaryDetails");
 
                     b.Navigation("SalaryModifiHistorys");

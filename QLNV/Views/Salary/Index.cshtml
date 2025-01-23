@@ -47,7 +47,7 @@
                     {
 
                         <tr>
-                            <td>@item.Employee.Id</td>
+                            <td>@item.EmployeeId</td>
                             <td>
                                 @string.Format("{0:#,#}", @item.MinimumSalary).Replace(",", ",")
                             </td>
@@ -72,9 +72,9 @@
                                 @string.Format("{0:#,#}", @item.IncomeTax).Replace(",", ",")
                             </td>
                             <td>
-                                <a class="btn btn-warning" href="@Url.Action("Edit", "Salary", new { @id = @item.Employee.Id })"><i class="fa fa-pencil-square-o x5" aria-hidden="true"></i>Sửa</a>
-                                <a class="btn btn-info" href="@Url.Action("Payroll", "Salary", new { @id = @item.Employee.Id })">Tính lương</a>
-                                <a class="btn btn-primary" href="@Url.Action("PreviousSalary", "Salary", new  {@id = @item.Employee.Id })">Quá trình lương</a>
+                                <a class="btn btn-warning" href="@Url.Action("Edit", "Salary", new { @id = @item.EmployeeId })"><i class="fa fa-pencil-square-o x5" aria-hidden="true"></i>Sửa</a>
+                                <a class="btn btn-info" href="@Url.Action("Payroll", "Salary", new { @id = @item.EmployeeId })">Tính lương</a>
+                                <a class="btn btn-primary" href="@Url.Action("PreviousSalary", "Salary", new  {@id = @item.EmployeeId })">Quá trình lương</a>
 
                             </td>
                         </tr>
