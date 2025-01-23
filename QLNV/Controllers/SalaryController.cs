@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QLNV.Data;
 using QLNV.Models;
 
@@ -47,6 +48,7 @@ public class SalaryController : Controller
 
             
             SalaryModifiHistory modifiRecord = new();
+            
             modifiRecord.ModifiDate = DateOnly.FromDateTime(DateTime.Now);
             modifiRecord.EmployeeId = salary.EmployeeId ?? -1;
             modifiRecord.OldSalary = salary.MinimumSalary;
@@ -57,7 +59,7 @@ public class SalaryController : Controller
             
             modifiRecord.IncomeTax = salary.IncomeTax;
             modifiRecord.Coefficients = salary.Coefficients;
-
+            modifiRecord.Salary = newSalary;
             _context.SalaryModifiHistories.Add(modifiRecord);
             _context.SaveChanges();
         }
@@ -68,7 +70,7 @@ public class SalaryController : Controller
 
     public IActionResult Payroll(int id)
     {
-        var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+        var employee = _context.Employees.Include(e => e.Salary).FirstOrDefault(e => e.Id == id);
         if (employee is not null)
         {
             
@@ -104,7 +106,7 @@ public class SalaryController : Controller
 
             total = paidRecord.BaseSalary - (paidRecord.SocialInsurance + paidRecord.HealthInsurance + paidRecord.UnemploymentInsurance) - paidRecord.IncomeTax + paidRecord.Allowance;
             paidRecord.Total = total;
-            
+            paidRecord.Salary = employee.Salary;
             
             ViewBag.ok = "thanh toán thành công";
             _context.SalaryDetails.Add(paidRecord);
@@ -124,7 +126,9 @@ public class SalaryController : Controller
 
     public IActionResult PreviousSalary(int id)
     {
-        var previous = _context.SalaryModifiHistories.Where(x => x.EmployeeId == id).ToList();
+        var previous = _context.SalaryModifiHistories.Where(x => x.EmployeeId == id)
+            .Include(r => r.Salary)
+            .ToList();
         if (previous is not null)
         {
             return View(previous);

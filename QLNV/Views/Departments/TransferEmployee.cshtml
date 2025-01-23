@@ -167,9 +167,17 @@
         <input type="text" name="AvatarImagePath" value="@Model.AvatarImagePath" />
         <input type="text" name="Ethnic" value="@Model.Ethnic" />
         <input type="text" name="Phone" value="@Model.Phone" />
-        
+        @if (Model.IsActive)
+        {
+            <input type="checkbox" name="IsActive" value="true" checked />
+        }
+        else
+        {
+            <input type="checkbox" name="IsActive" value="false" checked />
+            
+        }
+
         <input type="text" name="DOB" value="@Model.DOB" />
-        <input type="text" name="IsActive" value="@Model.IsActive" />
         <input type="text" name="EmployeeEducatonId" value="@Model.EmployeeEducatonId" />
         
         <input type="text" name="CitizenNumber" value="@Model.CitizenNumber" />
@@ -184,8 +192,8 @@
             <label>Lý do</label>
         </div>
         <div class="col-md-4 col-sm-8">
-            <textarea class="form-control" name="LyDoChuyen"
-                      id="LyDoChuyen" rows="3"></textarea>
+            <textarea class="form-control" name="Detail"
+                      id="Detail" rows="3"></textarea>
 
         </div>
         <div class="col-sm-offset-4 col-sm-5" style="height:10px">

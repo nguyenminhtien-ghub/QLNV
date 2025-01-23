@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QLNV.Data;
 using QLNV.Models;
 
@@ -16,7 +17,7 @@ public class EmployeeAwardedController : Controller
     }
     public IActionResult Index()
     {
-        var awards = _context.EmployeeAwards.ToList();
+        var awards = _context.EmployeeAwards.Include(a => a.Employee).ToList();
         return View(awards);
     }
 
