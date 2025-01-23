@@ -27,7 +27,7 @@
 
 <div>
     <div style="padding:10px">
-        <a class="btn btn-primary" href="@Url.Action("Index", "Employee")">
+        <a class="btn btn-primary" href="@Url.Action("Create", "Employee")">
             Thêm nhân viên
         </a>
     </div>
@@ -52,9 +52,7 @@
                 <th>
                     Giới tính
                 </th>
-                <th>
-                    Ngày bắt đầu
-                </th>
+                
                 <th>
                     Số lượng: @Model.Count()
                 </th>
@@ -88,18 +86,7 @@
                         <td>@item.Name</td>
                         <td>@education</td>
                         <td>@gender</td>
-                        <td>
-                            @String.Format("{0:dd/MM/yyyy}", @item.BusinessContract.Begin)
-                            @{
-                                DateTime begin = Convert.ToDateTime(@item.BusinessContract.Begin);
-                                DateTime now = DateTime.Now.Date;
-                                TimeSpan Times = now - begin;
-
-                                int years = (int)Times.Days / 365;
-
-                            }
-
-                        </td>
+                        
                         <td>
                             <a class="btn btn-primary" href="@Url.Action("Index", "Employee", new { @id = @item.Id })"><i class="fa fa-address-book"></i>Quá trình công tác</a>
                             <a class="btn btn-info" href="@Url.Action("Index", "Employee", new { @id = @item.Id})">Học vấn</a>

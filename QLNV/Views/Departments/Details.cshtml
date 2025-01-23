@@ -63,13 +63,18 @@
                     
                     <td>
                         @{
-                            int gender = int.Parse(@Html.DisplayFor(modelItem => item.Gender).ToString());
                             String x = string.Empty;
-                            switch (gender)
+                            switch (item.Gender)
                             {
-                                case 1: x = "Nam"; break; ;
-                                case 0: x = "Nữ"; break;
-                                default: x = "Khác"; break;
+                                case Gender.Male: 
+                                    x = "Nam";
+                                    break;
+                                case Gender.Female: 
+                                    x = "Nữ";
+                                    break;
+                                default: 
+                                    x = "Khác";
+                                    break;
                             }
                         }
                         @x

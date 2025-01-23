@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Thêm nhân viên";
+    Layout = "_AdminLayout";
+}
+
+
+@model Employee
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Thêm nhân viên
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard", new { area = "Admin" })">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-user"></i> <a href="@Url.Action("Index","Employee")">Nhân viên</a>
+            </li>
+            <li>
+                <i class="fa fa-user"></i>Thêm nhân viên
+            </li>
+        </ol>
+    </div>
+</div>
+<form class="form-horizontal" method="post" role="form">
+   
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    
+
+    @* ma nhan vien *@
+    <div class="form-group">
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Mã nhân viên</label>
+        </div>
+
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="NumberCode"
+                   class="form-control"
+                   id="NumberCode"
+                   
+                   required />
+
+        </div>
+        <div class=" col-md-offset-5 col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+                @ViewBag.err
+                @Html.ValidationMessageFor(n => n.NumberCode)
+            </label>
+        </div>
+    </div>
+      
+
+    
+    <div class="form-group">
+        <!---start-->
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Họ tên</label>
+        </div>
+
+        <div class="col-md-4 col-sm-8">
+            <input type="text" name="Name"
+                   class="form-control"
+                   id="Name"
+                   
+                   required />
+        </div>
+        
+        <div class=" col-md-offset-5 col-sm-offset-4 col-sm-5" style="height:15px">
+            <label class="control-label text-danger">
+                @Html.ValidationMessageFor(n => n.Name)
+            </label>
+        </div>
+            <!---end--->
+        </div>
+ 
+    
+    <div class="form-group">
+        <!---start-->
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Giới tính</label>
+        </div>
+
+        <div class="col-md-4 col-sm-8">
+            <div class="radio-inline">
+                <label><input type="radio" name="Gender" value="1">Nam</label>
+            </div>
+            <div class="radio-inline">
+                <label><input type="radio" name="Gender" value="0">Nữ</label>
+            </div>
+            <div class="radio-inline">
+                <label><input type="radio" name="Gender" value="2">Khác</label>
+            </div>
+        </div>
+
+        <!---end--->
+
+    </div>
+   
+    @* chuc vu*@
+    <div class="form-group">
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Chức vụ</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            
+            @{
+                var position = (List<EmployeePosition>)ViewBag.Position;
+            }
+            
+            <select name="EmployeePosition" class="form-control">
+                @foreach (var item in position)
+                {
+                <option value="@item.Id.ToString()" selected>@item.PositionName</option>
+                }
+            </select>
+
+            @Html.ValidationMessageFor(model => model.EmployeePosition)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Phòng ban</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            @{
+                var departments = (List<Department>)ViewBag.Department;
+            }
+            <select name="Department" class="form-control">
+                @foreach (var item in departments)
+                {
+                    <option value="@item.Id.ToString()">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Department)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
+            <label>Chuyên ngành</label>
+        </div>
+        <div class="col-md-4 col-sm-8">
+            @{
+                var edu = (List<EmployeeEducation>)ViewBag.Edus;
+            }
+            <select name="EductionStatus" class="form-control">
+                @foreach (var item in edu)
+                {
+                <option value="@item.Id.ToString()" >@item.EducationName @item.MajorName</option>
+                }
+            </select>
+
+        </div>
+    </div>
+   
+    
+    <div class="form-group">
+        <div class=" col-md-offset-5 col-sm-offset-4 col-sm-5">
+            <input type="submit" value="Thêm nhân viên" class="btn btn-primary" />
+        </div>
+    </div>
+
+</form>
+
+
+

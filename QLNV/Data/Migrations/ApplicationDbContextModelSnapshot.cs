@@ -224,34 +224,6 @@ namespace QLNV.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("QLNV.Models.BusinessContract", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Begin")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ContractNumberCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("End")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("business_contract");
-                });
-
             modelBuilder.Entity("QLNV.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -291,9 +263,6 @@ namespace QLNV.Data.Migrations
 
                     b.Property<string>("AvatarImagePath")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BusinessContractId")
-                        .HasColumnType("int");
 
                     b.Property<string>("CitizenNumber")
                         .HasColumnType("nvarchar(max)");
@@ -336,8 +305,6 @@ namespace QLNV.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BusinessContractId");
 
                     b.HasIndex("DepartmentId");
 
@@ -747,10 +714,6 @@ namespace QLNV.Data.Migrations
 
             modelBuilder.Entity("QLNV.Models.Employee", b =>
                 {
-                    b.HasOne("QLNV.Models.BusinessContract", "BusinessContract")
-                        .WithMany("Employees")
-                        .HasForeignKey("BusinessContractId");
-
                     b.HasOne("QLNV.Models.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
@@ -768,8 +731,6 @@ namespace QLNV.Data.Migrations
                         .HasForeignKey("QLNV.Models.Employee", "SalaryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("BusinessContract");
 
                     b.Navigation("Department");
 
@@ -849,11 +810,6 @@ namespace QLNV.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Salary");
-                });
-
-            modelBuilder.Entity("QLNV.Models.BusinessContract", b =>
-                {
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("QLNV.Models.Department", b =>

@@ -27,7 +27,6 @@ public class Employee
 
     public virtual Department? Department { get; set; }
 
-    public virtual BusinessContract? BusinessContract { get; set; }
 
     public virtual EmployeeEducation? EductionStatus {  get; set; }
 

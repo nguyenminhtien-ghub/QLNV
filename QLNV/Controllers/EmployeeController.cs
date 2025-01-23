@@ -23,7 +23,7 @@ public class EmployeeController : Controller
     public IActionResult Delete(int id)
     {
         var employee = _context.Employees.SingleOrDefault(e => e.Id == id);
-        var contract = employee.BusinessContract;
+        
         var salary = _context.Salarys.SingleOrDefault(s => s.Employee.Id == id);
 
         var detailsSalarys = _context.SalaryDetails.Where(x => x.EmployeeId == id).ToList();
@@ -35,7 +35,7 @@ public class EmployeeController : Controller
 
         _context.Salarys.Remove(salary);
         _context.Employees.Remove(employee);
-        _context.BusinessContracts.Remove(contract);
+        
 
         _context.SaveChanges();
         return RedirectToAction(nameof(Index));
@@ -74,7 +74,7 @@ public class EmployeeController : Controller
                 previous.AvatarImagePath = employee.AvatarImagePath;
                 previous.Ethnic = employee.Ethnic;
                 previous.Phone = employee.Phone;
-                previous.BusinessContract = employee.BusinessContract;
+                
 
                 previous.DOB = employee.DOB;
                 previous.IsActive = employee.IsActive;
@@ -107,6 +107,97 @@ public class EmployeeController : Controller
         return View(employee);
     }
 
+    public IActionResult Create()
+    {
+        var positions = _context.EmployeePositions.ToList();
+        var edus = _context.EmployeeEducations.ToList();
+        var departments = _context.Departments.ToList();
+        ViewBag.Position = positions;
+        ViewBag.Edus = edus;
+        ViewBag.Department = departments;
+        return View();
+    }
 
+    [HttpPost]
+    public IActionResult Create(Employee employee)
+    {
+        if (ModelState.IsValid)
+        {
+            ViewBag.err = String.Empty;
+            var isExist = _context.Employees.Any(x => x.Id == employee.Id);
+
+            if (isExist)
+            {
+                ViewBag.err = "tài khoản đã tồn tại";
+                
+                return View(employee);
+            }
+            else
+            {
+                Salary salary = new();
+                
+                Employee newEmployee = new();
+                newEmployee.Id = employee.Id;
+                newEmployee.NumberCode = employee.NumberCode;
+                newEmployee.Name = employee.Name;
+                newEmployee.DOB = employee.DOB;
+                newEmployee.Country = employee.Country;
+                newEmployee.Gender = employee.Gender;
+                newEmployee.Ethnic = employee.Ethnic;
+                newEmployee.EmployeePosition = employee.EmployeePosition;
+                newEmployee.Department = employee.Department;
+                newEmployee.EductionStatus = employee.EductionStatus;
+                
+                
+                newEmployee.IsActive = true;
+               
+
+                //add hop dong
+                // contract.Employees = nv.MaNhanVien;
+                
+
+                
+                salary.Employee = employee;
+                salary.MinimumSalary = 1150000;
+                salary.SocialInsurance = 8.00M;
+                salary.HealthInsurance = 1.50M;
+                salary.UnemploymentInsurance = 1.00M;
+
+                var edu = _context.EmployeeEducations.FirstOrDefault(x => x.Id.Equals(employee.EductionStatus.Id));
+                var position = _context.EmployeePositions.SingleOrDefault(p => p.Id.Equals(employee.Id));
+
+                if (edu.Id.Equals(employee.EductionStatus.Id))
+                {
+                    salary.Coefficients = edu.Coefficient;
+                }
+
+
+                if (position.Id.Equals(employee.EmployeePosition.Id))
+                {
+                    
+                    salary.Allowance = position.Coefficient;
+                    
+                }
+
+
+
+                
+                _context.Employees.Add(newEmployee);
+                
+
+                _context.Salarys.Add(salary);
+                
+                _context.SaveChanges();
+                
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        else
+        {
+
+            return View(employee);
+        }
+    }
 
 }

@@ -11,7 +11,7 @@ namespace QLNV.Data
         {
         }
 
-        public DbSet<BusinessContract> BusinessContracts { get; set; }
+        
         public DbSet<Department> Departments { get; set; }
         public DbSet<EmployeeAward> EmployeeAwards { get; set; }
 

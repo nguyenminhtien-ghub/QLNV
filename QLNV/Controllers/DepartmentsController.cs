@@ -157,7 +157,7 @@ public class DepartmentsController : Controller
         transferredEmployee.AvatarImagePath = employee.AvatarImagePath;
         transferredEmployee.Ethnic = employee.Ethnic;
         transferredEmployee.Phone = employee.Phone;
-        transferredEmployee.BusinessContract = employee.BusinessContract;
+       
         transferredEmployee.DOB = employee.DOB;
         transferredEmployee.IsActive = employee.IsActive;
         transferredEmployee.EductionStatus = employee.EductionStatus;
@@ -207,20 +207,16 @@ public class DepartmentsController : Controller
         }
 
         var employees = department.Employees.ToList();
-
-        var contacts = employees.Select(e => e.BusinessContract).ToList();
-
-        foreach (var c in contacts)
+ 
+        
+        foreach (var e in employees)
         {
-            foreach (var e in employees)
-            {
-                if (c.Id == e.Id)
-                {
-                    _context.Employees.Remove(e);
-                }
-            }
-            _context.BusinessContracts.Remove(c);
+
+            _context.Employees.Remove(e);
+            
         }
+            
+        
         _context.Departments.Remove(department);
         _context.SaveChanges();
 
