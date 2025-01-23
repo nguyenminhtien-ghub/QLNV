@@ -44,7 +44,10 @@ public class DepartmentsController : Controller
         var departmentName = department.Name;
         ViewBag.DepartmentName = departmentName;
         ViewBag.Id = id;
-        var employees = _context.Employees.Where(e => e.DepartmentId == id).ToList();
+        var employees = _context.Employees.Where(e => e.DepartmentId == id)
+            .Include(e => e.EmployeePosition)
+            .Include(e => e.EductionStatus)
+            .ToList();
 
         return View(employees);
     }
