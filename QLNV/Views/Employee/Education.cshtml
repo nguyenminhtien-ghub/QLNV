@@ -14,13 +14,13 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard")">Tổng quan</a>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard", new { area = "Admin"})">Tổng quan</a>
             </li>
             <li>
-                <i class="fa fa-fw fa-tasks"></i><a href="@Url.Action("Index", "QuanLyPhongBan")">Phòng ban</a>
+                <i class="fa fa-fw fa-tasks"></i> <a href="@Url.Action("Index", "Departments")">Phòng ban</a>
             </li>
             <li>
-                <i class="fa fa-bar-chart-o"></i> <a href="@Url.Action("index","QuanLyUser")">Nhân viên</a>
+                <i class="fa fa-bar-chart-o"></i> <a href="@Url.Action("Index","Employee")">Nhân viên</a>
             </li>
         </ol>
     </div>
@@ -54,46 +54,40 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NhanVien.HoTen)
+                        @Html.DisplayFor(modelItem => item.Employee.Name)
                     </td>
 
                     @{
-                        String cn = String.Empty;
-                        foreach (var c in db.ChuyenNganhs)
+                        String major = String.Empty;
+                        String oldEdu = String.Empty;
+                        String newEdu = String.Empty;
+                        foreach (var e in (List<EmployeeEducation>)ViewBag.Edus)
                         {
-                            if (@item.NhanVien.MaChuyenNganh == c.MaChuyenNganh)
+                            if (@item.Employee.EductionStatus.Id == e.Id)
                             {
-                                cn = c.TenChuyenNganh;
+                                major = e.MajorName;
                             }
+                            if (item.OldEducationId == e.Id)
+                            {
+                                oldEdu = e.EducationName;
+                            }
+                            if (item.NewEducationId == e.Id)
+                            {
+                                newEdu = e.EducationName;
+                            }
+
                         }
                     }
-                    <td>@cn</td>
-                    @{
-                        String t = String.Empty;
-                        String s = String.Empty;
-
-                        foreach (var hv in db.TrinhDoHocVans)
-                        {
-
-                            if (item.MaTrinhDoTruoc == hv.MaTrinhDoHocVan)
-                            {
-                                t = hv.TenTrinhDo;
-                            }
-                            if (item.MaTrinhDoCapNhat == hv.MaTrinhDoHocVan)
-                            {
-                                s = hv.TenTrinhDo;
-                            }
-                        }
-                    }
+                    <td>@major</td>
                     <td>
-                        @t
+                        @oldEdu
                     </td>
                     <td>
-                        @s
+                        @newEdu
                     </td>
 
                     <td>
-                        @String.Format("{0:dd/MM/yyyy}", @item.NgayCapNhat)
+                        @String.Format("{0:dd/MM/yyyy}", @item.UpdateTime)
                     </td>
                 </tr>
             }

@@ -22,12 +22,21 @@ public class Employee
     
     public string? Ethnic {  get; set; }
     public string? Phone { get; set; }
+
+    public int EmployeePositionId { get; set; }
+
+    [ForeignKey(nameof(EmployeePositionId))]
     public virtual EmployeePosition? EmployeePosition { get; set; }
     public bool IsActive { get; set; }
 
+    public int DepartmentId { get; set; }
+
+    [ForeignKey(nameof(DepartmentId))]
     public virtual Department? Department { get; set; }
 
+    public int EmployeeEducatonId {  get; set; }
 
+    [ForeignKey(nameof(EmployeeEducatonId))]
     public virtual EmployeeEducation? EductionStatus {  get; set; }
 
     public string? CitizenNumber {  get; set; }
