@@ -15,7 +15,7 @@
                 <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard", new { area = "Admin"})">Tổng quan</a>
             </li>
             <li>
-                <i class="fa fa-tasks"></i> <a href="@Url.Action("Index","Department")">Phòng ban</a>
+                <i class="fa fa-tasks"></i> <a href="@Url.Action("Index","Departments")">Phòng ban</a>
             </li>
             <li>
                 Cập nhật phụ cấp
@@ -49,7 +49,7 @@
                     <td>
                         @*@Html.TextBox("HSPC", item.HSPC, new {Title = "định dạng giá trị vd:0,45", placeholder = "vd: 0,45", })*@
 
-                        <input name="HSPC" value="@item.Coefficient" title="định dạng giá trị vd 0,45" placeholder="vd: 0,45" />
+                        <input name="Coefficient" value="@item.Coefficient" title="định dạng giá trị vd 0,45" placeholder="vd: 0,45" />
 
                     </td>
                     <td>

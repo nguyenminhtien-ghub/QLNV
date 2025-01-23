@@ -63,7 +63,7 @@
                         String newEdu = String.Empty;
                         foreach (var e in (List<EmployeeEducation>)ViewBag.Edus)
                         {
-                            if (@item.Employee.EductionStatus.Id == e.Id)
+                            if (@item.Employee.EmployeeEducatonId == e.Id)
                             {
                                 major = e.MajorName;
                             }

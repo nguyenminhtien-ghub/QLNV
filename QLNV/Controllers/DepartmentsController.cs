@@ -44,7 +44,7 @@ public class DepartmentsController : Controller
         var departmentName = department.Name;
         ViewBag.DepartmentName = departmentName;
         ViewBag.Id = id;
-        var employees = _context.Employees.Where(e => e.Department.Id == id);
+        var employees = _context.Employees.Where(e => e.DepartmentId == id);
 
         return View(employees);
     }
@@ -148,8 +148,8 @@ public class DepartmentsController : Controller
         transferredEmployee.Id = employee.Id;
         transferredEmployee.NumberCode = employee.NumberCode;
         transferredEmployee.Name = employee.Name;
-        transferredEmployee.EmployeePosition = employee.EmployeePosition;
-        transferredEmployee.Department = _context.Departments.Find(history.NewDepartment);
+        transferredEmployee.EmployeePositionId = employee.EmployeePositionId;
+        transferredEmployee.DepartmentId = history.NewDepartment;
 
         
         transferredEmployee.Gender = employee.Gender;
@@ -160,7 +160,7 @@ public class DepartmentsController : Controller
        
         transferredEmployee.DOB = employee.DOB;
         transferredEmployee.IsActive = employee.IsActive;
-        transferredEmployee.EductionStatus = employee.EductionStatus;
+        transferredEmployee.EmployeeEducatonId = employee.EmployeeEducatonId;
        
         transferredEmployee.CitizenNumber = employee.CitizenNumber;
 
@@ -169,13 +169,13 @@ public class DepartmentsController : Controller
         transfer.Employee = _context.Employees.Find(employee.Id);
 
         transfer.ChangeDate = DateOnly.FromDateTime(DateTime.Now);
-        transfer.OldDepartment = employee.Department.Id; 
+        transfer.OldDepartment = employee.DepartmentId; 
 
         transfer.NewDepartment = history.NewDepartment;
         transfer.Detail = history.Detail;
         
         var salary = _context.Salarys.SingleOrDefault(e => e.Employee.Id.Equals(employee.Id));
-        var position = _context.EmployeePositions.SingleOrDefault(e => e.Id.Equals(employee.EmployeePosition.Id));
+        var position = _context.EmployeePositions.SingleOrDefault(e => e.Id.Equals(employee.EmployeePositionId));
 
         salary.Allowance = position.Coefficient;
 
@@ -246,13 +246,13 @@ public class DepartmentsController : Controller
     }
 
     [HttpPost]
-    public IActionResult EditAllowance(int id, FormCollection form)
+    public IActionResult EditAllowance(EmployeePosition employeePosition, int id, IFormCollection form)
     {
         var position = _context.EmployeePositions.Find(id);
         position.Coefficient = decimal.Parse(form["Coefficient"].ToString() ?? "0");
 
         _context.SaveChanges();
-        return View();
+        return RedirectToAction(nameof(EditAllowance));
     }
 
 

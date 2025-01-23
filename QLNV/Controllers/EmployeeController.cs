@@ -61,15 +61,15 @@ public class EmployeeController : Controller
                 EmployeeEducationHistory eduRecord = new();
                 eduRecord.EmployeeId = employee.Id;
                 eduRecord.UpdateTime = DateOnly.FromDateTime(DateTime.Now);
-                eduRecord.OldEducationId = previous.EductionStatus.Id;
-                eduRecord.NewEducationId = employee.EductionStatus.Id;
+                eduRecord.OldEducationId = previous.EmployeeEducatonId;
+                eduRecord.NewEducationId = employee.EmployeeEducatonId;
 
                 previous.NumberCode = employee.NumberCode;
                 previous.Name = employee.Name;
                 
                 previous.Gender = employee.Gender;
 
-                previous.EmployeePosition = employee.EmployeePosition;
+                previous.EmployeePositionId = employee.EmployeePositionId;
                 previous.Country = employee.Country;
                 previous.AvatarImagePath = employee.AvatarImagePath;
                 previous.Ethnic = employee.Ethnic;
@@ -78,9 +78,9 @@ public class EmployeeController : Controller
 
                 previous.DOB = employee.DOB;
                 previous.IsActive = employee.IsActive;
-                previous.EductionStatus = employee.EductionStatus;
+                previous.EmployeeEducatonId = employee.EmployeeEducatonId;
                 
-                previous.Department = employee.Department;
+                previous.DepartmentId = employee.DepartmentId;
                 previous.CitizenNumber = employee.CitizenNumber;
 
                 var edu = _context.EmployeeEducations.FirstOrDefault(x => x.Id.Equals(previous.Id));
@@ -144,9 +144,9 @@ public class EmployeeController : Controller
                 newEmployee.Country = employee.Country;
                 newEmployee.Gender = employee.Gender;
                 newEmployee.Ethnic = employee.Ethnic;
-                newEmployee.EmployeePosition = employee.EmployeePosition;
-                newEmployee.Department = employee.Department;
-                newEmployee.EductionStatus = employee.EductionStatus;
+                newEmployee.EmployeePositionId = employee.EmployeePositionId;
+                newEmployee.DepartmentId = employee.DepartmentId;
+                newEmployee.EmployeeEducatonId = employee.EmployeeEducatonId;
                 
                 
                 newEmployee.IsActive = true;
@@ -163,16 +163,16 @@ public class EmployeeController : Controller
                 salary.HealthInsurance = 1.50M;
                 salary.UnemploymentInsurance = 1.00M;
 
-                var edu = _context.EmployeeEducations.FirstOrDefault(x => x.Id.Equals(employee.EductionStatus.Id));
+                var edu = _context.EmployeeEducations.FirstOrDefault(x => x.Id.Equals(employee.EmployeeEducatonId));
                 var position = _context.EmployeePositions.SingleOrDefault(p => p.Id.Equals(employee.Id));
 
-                if (edu.Id.Equals(employee.EductionStatus.Id))
+                if (edu.Id.Equals(employee.EmployeeEducatonId))
                 {
                     salary.Coefficients = edu.Coefficient;
                 }
 
 
-                if (position.Id.Equals(employee.EmployeePosition.Id))
+                if (position.Id.Equals(employee.EmployeePositionId))
                 {
                     
                     salary.Allowance = position.Coefficient;

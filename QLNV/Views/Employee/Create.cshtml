@@ -111,14 +111,14 @@
                 var position = (List<EmployeePosition>)ViewBag.Position;
             }
             
-            <select name="EmployeePosition" class="form-control">
+            <select name="EmployeePositionId" class="form-control">
                 @foreach (var item in position)
                 {
                 <option value="@item.Id.ToString()" selected>@item.PositionName</option>
                 }
             </select>
 
-            @Html.ValidationMessageFor(model => model.EmployeePosition)
+            @Html.ValidationMessageFor(model => model.EmployeePositionId)
         </div>
     </div>
     
@@ -130,13 +130,13 @@
             @{
                 var departments = (List<Department>)ViewBag.Department;
             }
-            <select name="Department" class="form-control">
+            <select name="DepartmentId" class="form-control">
                 @foreach (var item in departments)
                 {
                     <option value="@item.Id.ToString()">@item.Name</option>
                 }
             </select>
-            @Html.ValidationMessageFor(model => model.Department)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
         </div>
     </div>
     
@@ -148,7 +148,7 @@
             @{
                 var edu = (List<EmployeeEducation>)ViewBag.Edus;
             }
-            <select name="EductionStatus" class="form-control">
+            <select name="EmployeeEducatonId" class="form-control">
                 @foreach (var item in edu)
                 {
                 <option value="@item.Id.ToString()" >@item.EducationName @item.MajorName</option>

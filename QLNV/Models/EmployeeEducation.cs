@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLNV.Models;
 
-[Table("employee_ducation")]
+[Table("employee_education")]
 public class EmployeeEducation
 {
     public int Id {  get; set; }

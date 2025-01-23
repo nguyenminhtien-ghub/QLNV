@@ -105,7 +105,7 @@
                 @foreach (var item in positions)
                 {
 
-                    if (Model.EmployeePosition.Id == item.Id)
+                    if (Model.EmployeePositionId == item.Id)
                     {
                         <option value="@item.Id.ToString()" selected>@item.PositionName</option>
                     }
@@ -121,7 +121,7 @@
         </div>
         <div class="col-sm-offset-4 col-sm-5" style="height:10px">
             <label class="control-label text-danger">
-                @Html.ValidationMessageFor(model => model.EmployeePosition)
+                @Html.ValidationMessageFor(model => model.EmployeePositionId)
             </label>
         </div>
     </div>
@@ -137,7 +137,7 @@
             <select name="Department" class="form-control">
                 @foreach (var item in departments)
                 {
-                    if (Model.Department.Id == item.Id)
+                    if (Model.DepartmentId == item.Id)
                     {
                         <option value="@item.Id.ToString()" selected>@item.Name</option>
                     }
@@ -147,7 +147,7 @@
         </div>
         <div class="col-sm-offset-4 col-sm-5" style="height:10px">
             <label class="control-label text-danger">
-                @Html.ValidationMessageFor(model => model.Department)
+                @Html.ValidationMessageFor(model => model.DepartmentId)
             </label>
         </div>
     </div>
@@ -174,7 +174,7 @@
         </div>
         <div class="col-sm-offset-4 col-sm-5" style="height:10px">
             <label class="control-label text-danger">
-                @Html.ValidationMessageFor(model => model.Department)
+                @Html.ValidationMessageFor(model => model.DepartmentId)
             </label>
         </div>
     </div>
@@ -190,7 +190,7 @@
         
         <input type="text" name="DOB" value="@Model.DOB" />
         <input type="text" name="IsActive" value="@Model.IsActive" />
-        <input type="text" name="EductionStatus" value="@Model.EductionStatus" />
+        <input type="text" name="EmployeeEducatonId" value="@Model.EmployeeEducatonId" />
         
         <input type="text" name="CitizenNumber" value="@Model.CitizenNumber" />
 

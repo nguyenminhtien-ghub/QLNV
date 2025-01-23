@@ -273,13 +273,13 @@ namespace QLNV.Data.Migrations
                     b.Property<DateOnly>("DOB")
                         .HasColumnType("date");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EductionStatusId")
+                    b.Property<int>("EmployeeEducatonId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmployeePositionId")
+                    b.Property<int>("EmployeePositionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Ethnic")
@@ -308,7 +308,7 @@ namespace QLNV.Data.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("EductionStatusId");
+                    b.HasIndex("EmployeeEducatonId");
 
                     b.HasIndex("EmployeePositionId");
 
@@ -372,7 +372,7 @@ namespace QLNV.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("employee_ducation");
+                    b.ToTable("employee_education");
                 });
 
             modelBuilder.Entity("QLNV.Models.EmployeeEducationHistory", b =>
@@ -716,15 +716,21 @@ namespace QLNV.Data.Migrations
                 {
                     b.HasOne("QLNV.Models.Department", "Department")
                         .WithMany("Employees")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("QLNV.Models.EmployeeEducation", "EductionStatus")
                         .WithMany("Employees")
-                        .HasForeignKey("EductionStatusId");
+                        .HasForeignKey("EmployeeEducatonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("QLNV.Models.EmployeePosition", "EmployeePosition")
                         .WithMany("Employees")
-                        .HasForeignKey("EmployeePositionId");
+                        .HasForeignKey("EmployeePositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("QLNV.Models.Salary", "Salary")
                         .WithOne("Employee")
