@@ -95,9 +95,9 @@
                         @Html.DisplayFor(modelItem => item.EductionStatus.EducationName)
                     </td>
                     <td>
-                       
-                        <a class="btn btn-info" href="@Url.Action("Index", "Employee", new { @id = @item.Id })">Quá trình công tác</a>
-                        <a class="btn btn-primary" href="@Url.Action("TransferEmployee", "Departments", new { @id = @item.Id })">Chuyển nhân viên</a>
+
+                        <a class="btn btn-info" href="@Url.Action("Promotion", "Employee", new { @id = @item.Id })">Quá trình công tác</a>
+                        <a class="btn btn-primary" href="@Url.Action("TransferEmployee", "Departments", new { @employeeId = @item.Id })">Chuyển nhân viên</a>
                     </td>
                 </tr>
             }

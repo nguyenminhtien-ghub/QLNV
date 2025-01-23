@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QLNV.Data;
 using QLNV.Models;
 
@@ -16,7 +17,9 @@ public class EmployeeController : Controller
     }
     public IActionResult Index()
     {
-        var employees = _context.Employees.Where(e => e.IsActive).ToList();
+        var employees = _context.Employees.Where(e => e.IsActive)
+            .Include(e => e.EductionStatus)
+            .ToList();
         return View(employees);
     }
 
@@ -43,7 +46,8 @@ public class EmployeeController : Controller
 
     public IActionResult Edit(int id)
     {
-        var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+        var employee = _context.Employees.Include(e => e.Department)
+            .Include(e => e.EductionStatus).FirstOrDefault(e => e.Id == id);
         var edus = _context.EmployeeEducations.ToList();
         ViewBag.Edus = edus;
         return View(employee);
@@ -204,7 +208,8 @@ public class EmployeeController : Controller
 
     public IActionResult Promotion(int id)
     {
-        var record = _context.EmployeePositionHistories.Where(x => x.Employee.Id == id).ToList();
+        var record = _context.EmployeePositionHistories.Where(x => x.Employee.Id == id)
+            .Include(x => x.Employee).ToList();
         var deparments = _context.Departments.ToList();
         ViewBag.Department = deparments;
         return View(record);
@@ -212,7 +217,8 @@ public class EmployeeController : Controller
 
     public IActionResult Education(int id)
     {
-        var record = _context.EmployeeEducationHistories.Where(x => x.EmployeeId == id).ToList();
+        var record = _context.EmployeeEducationHistories.Where(x => x.EmployeeId == id)
+            .Include(x => x.Employee).ToList();
         ViewBag.Edus = _context.EmployeeEducations.ToList();
         return View(record);
     }

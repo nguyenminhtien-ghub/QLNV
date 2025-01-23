@@ -31,25 +31,7 @@
     @*@Html.ValidationSummary(false)*@
 
     
-    <div class="form-group">
-        <!---start-->
-        <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
-            <label>Mã nhân viên</label>
-        </div>
-        <div class="col-md-4 col-sm-8">
-            <input type="text" name="Id"
-                   class="form-control"
-                   id="Id"
-                   
-                   readonly />
-        </div>
-        <div class="col-sm-offset-4 col-sm-5" style="height:10px">
-            <label class="control-label text-danger">
-                @Html.ValidationMessageFor(n => n.Id)
-            </label>
-        </div>
-        <!---end--->
-    </div>
+    
     
     <div class="form-group">
         <!---start-->
@@ -60,7 +42,7 @@
             <input type="text" name="NumberCode"
                    class="form-control"
                    id="NumberCode"
-                   
+                   value="@Model.NumberCode"
                    readonly />
         </div>
         <div class="col-sm-offset-4 col-sm-5" style="height:10px">
@@ -80,7 +62,7 @@
             <input type="text" name="Name"
                    class="form-control"
                    id="Name"
-                   
+                   value="@Model.Name"
                    readonly />
         </div>
         <div class="col-sm-offset-4 col-sm-5" style="height:10px">
@@ -100,7 +82,7 @@
 
                 var positions = (List<EmployeePosition>)ViewBag.Positions;
             }
-            <select name="EmployeePosition" class="form-control">
+            <select name="EmployeePositionId" class="form-control">
 
                 @foreach (var item in positions)
                 {
@@ -125,7 +107,7 @@
             </label>
         </div>
     </div>
-    @* phong ban*@
+    
     <div class="form-group">
         <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
             <label>Phòng ban</label>
@@ -134,7 +116,7 @@
             @{
                 var departments = (List<Department>)ViewBag.Departments;
             }
-            <select name="Department" class="form-control">
+            <select name="DepartmentId" class="form-control">
                 @foreach (var item in departments)
                 {
                     if (Model.DepartmentId == item.Id)
@@ -154,9 +136,7 @@
 
     @**@
 
-    @{
-        var transfers = ViewBag.Historys;
-    }
+    
     <div class="form-group">
         <div class="control-label col-md-offset-1 col-md-4 col-sm-4">
             <label>Phòng ban chuyển đến</label>
@@ -181,7 +161,7 @@
     @**@
 
     <div class="hidden">
-        <
+        <input type="text" name="Id" value="@Model.Id"/>
         <input type="text" name="Gender" value="@Model.Gender" />
         <input type="text" name="Country" value="@Model.Country" />
         <input type="text" name="AvatarImagePath" value="@Model.AvatarImagePath" />

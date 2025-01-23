@@ -134,12 +134,17 @@ public class DepartmentsController : Controller
 
     public IActionResult TransferEmployee(int employeeId)
     {
-        var employee = _context.Employees.FirstOrDefault(e => e.Id == employeeId);
+        var employee = _context.Employees
+            .Include(e => e.EmployeePosition)
+            .FirstOrDefault(e => e.Id == employeeId);
 
         if (employee is null)
         {
             return RedirectToAction(nameof(Index));
         }
+        ViewBag.Positions = _context.EmployeePositions.ToList();
+        ViewBag.Departments = _context.Departments.ToList();
+        //ViewBag.Histories = _context.EmployeePositionHistories.ToList();
         return View(employee);
     }
 
@@ -185,7 +190,7 @@ public class DepartmentsController : Controller
         _context.EmployeePositionHistories.Add(transfer);
         ViewBag.Positions = _context.EmployeePositions.ToList();
         ViewBag.Departments = _context.Departments.ToList();
-        ViewBag.Historys = _context.EmployeePositionHistories.ToList();
+        //ViewBag.Histories = _context.EmployeePositionHistories.ToList();
 
         _context.SaveChanges();
         return RedirectToAction(nameof(Index));
