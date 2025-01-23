@@ -200,4 +200,18 @@ public class EmployeeController : Controller
         }
     }
 
+    public IActionResult Promotion(int id)
+    {
+        var record = _context.EmployeePositionHistories.Where(x => x.Employee.Id == id).ToList();
+        var deparments = _context.Departments.ToList();
+        ViewBag.Department = deparments;
+        return View(record);
+    }
+
+    public IActionResult Education(int id)
+    {
+        var edus = _context.EmployeeEducationHistories.Where(x => x.EmployeeId == id).ToList();
+        return View(edus);
+    }
+
 }

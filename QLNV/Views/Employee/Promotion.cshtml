@@ -1,0 +1,92 @@
+﻿
+@model List<EmployeePositionHistory>
+
+@{
+    ViewBag.Title = "Quá trình công tác";
+    Layout = "_AdminLayout";
+}
+
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Quá trình công tác
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i> <a href="@Url.Action("Index", "AdminDashboard", new { area = "Admin" })">Tổng quan</a>
+            </li>
+            <li>
+                <i class="fa fa-fw fa-tasks"></i> <a href="@Url.Action("Index", "Departments")">Phòng ban</a>
+            </li>
+            <li>
+                <i class="fa fa-bar-chart-o"></i> <a href="@Url.Action("Index","Employee")">Nhân viên</a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table id="table-taikhoan" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="success">
+                <th>
+                    Mã nhân viên
+                </th>
+                <th>
+                    Phòng ban cũ
+                </th>
+                <th>
+                    Phòng ban chuyển đến
+                </th>
+                <th>
+                    Lý do
+                </th>
+                <th>
+                    Ngày chuyển
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.NumberCode)
+                    </td>
+                    @{
+                        var department = (List<Department>)ViewBag.Department;
+                        String oldDepartment = String.Empty;
+                        String newDepartment = String.Empty;
+                        foreach (var d in department)
+                        {
+                            if (d.Id.Equals(item.OldDepartment))
+                            {
+                                oldDepartment = d.Name;
+                            }
+                            if (d.Id.Equals(item.NewDepartment))
+                            {
+                                newDepartment = d.Name;
+                            }
+
+                        }
+                    }
+                    <td>
+                        @oldDepartment
+                    </td>
+                    <td>
+                        @newDepartment
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detail)
+                    </td>
+                    <td>
+                        @string.Format("{0:dd/MM/yyyy}", item.ChangeDate)
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
