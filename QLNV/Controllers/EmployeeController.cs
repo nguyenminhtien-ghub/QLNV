@@ -210,8 +210,9 @@ public class EmployeeController : Controller
 
     public IActionResult Education(int id)
     {
-        var edus = _context.EmployeeEducationHistories.Where(x => x.EmployeeId == id).ToList();
-        return View(edus);
+        var record = _context.EmployeeEducationHistories.Where(x => x.EmployeeId == id).ToList();
+        ViewBag.Edus = _context.EmployeeEducations.ToList();
+        return View(record);
     }
 
 }
